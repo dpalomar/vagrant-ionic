@@ -1,0 +1,54 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.require_version ">= 1.7.2"
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "dpalomar/centosNode"
+
+  config.vm.hostname = "ionic-android"
+
+  
+  config.vm.box_check_update = true
+
+
+  config.vm.network "forwarded_port", guest: 8100, host: 8100
+  config.vm.network "forwarded_port", guest: 35729, host: 35729
+  
+  config.vm.synced_folder "ionic-projects/", "/ionic-projects", create: true
+
+   config.vm.provider "virtualbox" do |vb|
+
+     vb.memory = "2048"
+     vb.cpus = 2
+     vb.customize ["modifyvm", :id, "--usb", "on"]
+     #vb.customize ["usbfilter", "add", "0", "--target", :id, "1197123b", "--vendorid", "0x04e8"]
+     vb.customize ["usbfilter", "add", "0", "--target", :id, "--name", "android", "--vendorid", "0x18d1"]
+	 
+   end
+
+
+
+   config.vm.provision "shell", inline: <<-SHELL
+
+    echo "*************************************************************************"
+ 	echo "***********************INSTALL COMPLETE**********************************"
+	echo "*************************************************************************"
+	echo "*                    Run vagrant ssh to start"
+	echo "*                    cd /ionic-projects"
+	echo "*                    ionic help"
+	echo "*"
+	echo "* First time you could run next command to configure vim "
+	echo "*               vim +BundleInstall +qall"
+	echo "*"
+	echo "**REMEMBER:** If you like create projects with shared folders in windows"
+	echo "* You must run vagrant up with administrator rights"
+	echo "*"
+	echo "* Run exit and vagrant halt to shutdown"
+	echo "*************************************************************************"
+	echo "Author: David Palomar"
+	echo "*****************************ENJOY***************************************"
+   SHELL
+
+end
