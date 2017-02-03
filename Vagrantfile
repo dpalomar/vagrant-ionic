@@ -60,7 +60,7 @@ Vagrant.configure("2") do |config|
      vb.memory = "2048"
      vb.cpus = 2
      vb.customize ["modifyvm", :id, "--usb", "on"]
-     #vb.customize ["usbfilter", "add", "0", "--target", :id, "1197123b", "--vendorid", "0x04e8"]
+     #vb.customize ["usbfilter", "add", "0", "--target", :id, "--name", "samsung", "--vendorid", "0x04e8"]
      vb.customize ["usbfilter", "add", "0", "--target", :id, "--name", "android", "--vendorid", "0x18d1"]
 	 
    end
