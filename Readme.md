@@ -101,3 +101,8 @@ Open your browser manually and navigate to http://localhost:8100
 - My plugged device is not listed.
 
 Please follow this guide: [Step 1](#how-to-attach-a-device) and next steps.
+
+- I'd like to use Geanymotion emulator on my host.
+
+Please follow this link: [https://github.com/driftyco/ionic-box/issues/17#issuecomment-57971827](https://github.com/driftyco/ionic-box/issues/17#issuecomment-57971827)
+
