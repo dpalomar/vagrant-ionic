@@ -25,6 +25,7 @@ This box contains:
     - [How to solve "_Not permissions_" issue](#how-to-solve-_not-permissions_-issue)
     - [How to resolve the adb command not found when use sudo.](#how-to-resolve-the-adb-command-not-found-when-use-sudo)
     - [How to resolve the _adb unauthorized_ issue](#how-to-resolve-the-_adb-unauthorized_-issue)
+    - [Can't build a project in windows](#cant-build-a-project-in-windows)
 - [FAQ](#faq)
 
 <!-- /TOC -->
@@ -90,6 +91,24 @@ Use this: `sudo ./android-sdk-linux/platform-tools/adb <command>`
 ## How to resolve the _adb unauthorized_ issue
 
 Check the display of you device and accept the alert of grant permissions to linked PC.
+
+## Can't build a project in windows
+
+If you are using a windows system maybe you have experienced a fail when run `ionic start <project> <template>`.
+This occurs because windows has a limit of length in shared folders and because can't use symbolic links, and npm do that.
+The solutions has 2 parts:
+
+1. Run `vagrant up`with administrator rights
+    1. Run `vagrant halt` and close your terminal.
+    2. Open a new terminal with administrator rights and run `vagrant up` again.
+2. Need change the **node_modules** folder to live in the virtual machine an not in the shared folder.
+    1. Run `mkdir ~/node_modules`
+    2. Run `mkdir -p /ionic-projects/<your-project>/node_modules` (If you have a previous project simply remove the node_modules folder and re-create again).
+    3. Run `sudo mount --bind ~/node_modules /ionic-projects/<your-project>/node_modules`
+3. `cd /ionic-projects/` and run `ionic start <your-project> <template>`
+    1. If you are re-building a previous project ionic will ask you to rewrite the project. Answer yes.
+4. Also you can run `npm install` inside the project folder. 
+
 
 # FAQ
 
